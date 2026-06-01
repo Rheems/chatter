@@ -137,11 +137,11 @@ export default function ProfilePage() {
                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 dark:text-white/30">
                             <span className="flex items-center gap-1">
                                 <MapPin className="h-4 w-4" />
-                                Nigeria
+                                <span>Nigeria</span>
                             </span>
                             <span className="flex items-center gap-1">
                                 <Calendar className="h-4 w-4" />
-                                Joined May 2026
+                                <span>Joined May 2026</span>
                             </span>
               
                             href="#"
