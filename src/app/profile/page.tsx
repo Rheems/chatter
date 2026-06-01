@@ -148,14 +148,14 @@ export default function ProfilePage() {
                             className="flex items-center gap-1 hover:text-[#F97316] transition-colors"
               >
                             <Twitter className="h-4 w-4" />
-                            @kareemah
+                            <span>@kareemah</span>
                         </a>
               
                         href="#"
                         className="flex items-center gap-1 hover:text-[#F97316] transition-colors"
               >
                         <Github className="h-4 w-4" />
-                        kareemah
+                        <span>kareemah</span>
                     </a>
                 </div>
 
