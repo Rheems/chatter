@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import {
-  MapPin, Link as LinkIcon, Twitter,
-  Github, Calendar, Settings, PenLine,
+  MapPin, Calendar, Settings, PenLine,
   Heart, MessageCircle, Bookmark, Eye
 } from 'lucide-react'
 
@@ -24,7 +23,7 @@ const userPosts = [
   },
   {
     id: '3',
-    title: 'Nigeria\'s Tech Renaissance',
+    title: "Nigeria's Tech Renaissance",
     excerpt: 'From Paystack to Flutterwave, Nigerian startups are rewriting the rules of African tech.',
     tag: 'Technology',
     readingTime: '8 min read',
@@ -58,7 +57,7 @@ const bookmarkedPosts = [
   {
     id: '4',
     title: 'Purple Hibiscus — Faith, Freedom and Family',
-    excerpt: 'Chimamanda Ngozi Adichie\'s debut novel follows fifteen-year-old Kambili in Enugu.',
+    excerpt: "Chimamanda Ngozi Adichie's debut novel follows fifteen-year-old Kambili in Enugu.",
     author: 'Chimamanda Ngozi Adichie',
     tag: 'Writing',
     readingTime: '13 min read',
@@ -66,138 +65,122 @@ const bookmarkedPosts = [
 ]
 
 export default function ProfilePage() {
-    const [activeTab, setActiveTab] = useState('Posts')
+  const [activeTab, setActiveTab] = useState('Posts')
 
-    return (
-        <div className="min-h-screen bg-gray-50 dark:bg-[#0A0F1E]">
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0A0F1E]">
 
-            {/* Cover */}
-            <div className="h-48 bg-gradient-to-r from-[#0F2B5B] via-[#1a3a7a] to-[#0F2B5B] relative">
-                <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                        backgroundImage: `radial-gradient(circle at 30% 50%, #F97316 0%, transparent 50%)`
-                    }}
-                />
+      {/* Cover */}
+      <div className="h-48 bg-gradient-to-r from-[#0F2B5B] via-[#1a3a7a] to-[#0F2B5B] relative">
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `radial-gradient(circle at 30% 50%, #F97316 0%, transparent 50%)`
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4">
+
+        {/* Profile Header */}
+        <div className="relative -mt-16 mb-6">
+          <div className="flex items-end justify-between">
+
+            {/* Avatar */}
+            <div className="h-32 w-32 rounded-2xl bg-[#0F2B5B] border-4 border-white dark:border-[#0A0F1E] flex items-center justify-center text-4xl font-bold text-white shadow-xl">
+              K
             </div>
 
-            <div className="container mx-auto px-4">
-
-                {/* Profile Header */}
-                <div className="relative -mt-16 mb-6">
-                    <div className="flex items-end justify-between">
-
-                        {/* Avatar */}
-                        <div className="h-32 w-32 rounded-2xl bg-[#0F2B5B] border-4 border-white dark:border-[#0A0F1E] flex items-center justify-center text-4xl font-bold text-white shadow-xl">
-                            K
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex items-center gap-3 pb-2">
-                            <Link
-                                href="/dashboard"
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-gray-200 dark:border-white/10 text-sm font-semibold text-gray-600 dark:text-white/60 hover:border-[#0F2B5B] dark:hover:border-white/30 bg-white dark:bg-white/5 transition-all"
-                            >
-                                <Eye className="h-4 w-4" />
-                                Analytics
-                            </Link>
-                            <Link
-                                href="/posts/new"
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F97316] text-white text-sm font-semibold hover:bg-[#EA6C0A] transition-all"
-                            >
-                                <PenLine className="h-4 w-4" />
-                                Write
-                            </Link>
-                            <button className="p-2 rounded-xl border-2 border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 hover:border-[#0F2B5B] dark:hover:border-white/30 bg-white dark:bg-white/5 transition-all">
-                                <Settings className="h-4 w-4" />
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Name and Bio */}
-                    <div className="mt-4 space-y-3">
-                        <div>
-                            <h1
-                                className="text-2xl font-bold text-[#0F2B5B] dark:text-white"
-                                style={{ fontFamily: 'var(--font-playfair)' }}
-                            >
-                                Kareemah Ahmad Yusuf
-                            </h1>
-                            <p className="text-gray-500 dark:text-white/50 text-sm">
-                                @kareemah
-                            </p>
-                        </div>
-
-                        <p className="text-gray-600 dark:text-white/60 max-w-lg">
-                            Frontend Engineer & Writer. Building Chatter — a publishing platform for African voices.
-                            First full stack project  Based in Bauchi Nigeria.
-                        </p>
-
-                        {/* Meta Info */}
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 dark:text-white/30">
-                            <span className="flex items-center gap-1">
-                                <MapPin className="h-4 w-4" />
-                                <span>Nigeria</span>
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <Calendar className="h-4 w-4" />
-                                <span>Joined May 2026</span>
-                            </span>
-              
-                            href="#"
-                            className="flex items-center gap-1 hover:text-[#F97316] transition-colors"
+            {/* Action Buttons */}
+            <div className="flex items-center gap-3 pb-2">
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-gray-200 dark:border-white/10 text-sm font-semibold text-gray-600 dark:text-white/60 hover:border-[#0F2B5B] dark:hover:border-white/30 bg-white dark:bg-white/5 transition-all"
               >
-                            <Twitter className="h-4 w-4" />
-                            <span>@kareemah</span>
-                        </a>
-              
-                        href="#"
-                        className="flex items-center gap-1 hover:text-[#F97316] transition-colors"
+                <Eye className="h-4 w-4" />
+                <span>Analytics</span>
+              </Link>
+              <Link
+                href="/posts/new"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F97316] text-white text-sm font-semibold hover:bg-[#EA6C0A] transition-all"
               >
-                        <Github className="h-4 w-4" />
-                        <span>kareemah</span>
-                    </a>
-                </div>
-
-                {/* Stats */}
-                <div className="flex items-center gap-6 pt-2">
-                    <div className="text-center">
-                        <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
-                            {userPosts.length}
-                        </p>
-                        <p className="text-xs text-gray-400 dark:text-white/30">
-                            Posts
-                        </p>
-                    </div>
-                    <div className="w-px h-8 bg-gray-200 dark:bg-white/10" />
-                    <div className="text-center">
-                        <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
-                            248
-                        </p>
-                        <p className="text-xs text-gray-400 dark:text-white/30">
-                            Followers
-                        </p>
-                    </div>
-                    <div className="w-px h-8 bg-gray-200 dark:bg-white/10" />
-                    <div className="text-center">
-                        <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
-                            89
-                        </p>
-                        <p className="text-xs text-gray-400 dark:text-white/30">
-                            Following
-                        </p>
-                    </div>
-                    <div className="w-px h-8 bg-gray-200 dark:bg-white/10" />
-                    <div className="text-center">
-                        <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
-                            6.2K
-                        </p>
-                        <p className="text-xs text-gray-400 dark:text-white/30">
-                            Total Views
-                        </p>
-                    </div>
-                </div>
+                <PenLine className="h-4 w-4" />
+                <span>Write</span>
+              </Link>
+              <button className="p-2 rounded-xl border-2 border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 hover:border-[#0F2B5B] dark:hover:border-white/30 bg-white dark:bg-white/5 transition-all">
+                <Settings className="h-4 w-4" />
+              </button>
             </div>
+          </div>
+
+          {/* Name and Bio */}
+          <div className="mt-4 space-y-3">
+            <div>
+              <h1
+                className="text-2xl font-bold text-[#0F2B5B] dark:text-white"
+                style={{ fontFamily: 'var(--font-playfair)' }}
+              >
+                Kareemah Ahmad
+              </h1>
+              <p className="text-gray-500 dark:text-white/50 text-sm">
+                @kareemah
+              </p>
+            </div>
+
+            <p className="text-gray-600 dark:text-white/60 max-w-lg">
+              Product Manager, Django Backend Engineer and Poet based in Bauchi, Nigeria.
+              I write poems for school children and believe every African voice deserves
+              an audience. Chatter is my first full stack project built with love.
+            </p>
+
+            {/* Meta Info */}
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 dark:text-white/30">
+              <span className="flex items-center gap-1"><MapPin className="h-4 w-4" /><span>Bauchi, Nigeria</span>
+              </span>
+              <span className="flex items-center gap-1"><Calendar className="h-4 w-4" /><span>Joined May 2026</span></span>
+              
+               <a href="https://github.com/Rheems" target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-[#F97316] transition-colors">GitHub</a>
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center gap-6 pt-2">
+              <div className="text-center">
+                <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
+                  {userPosts.length}
+                </p>
+                <p className="text-xs text-gray-400 dark:text-white/30">
+                  Posts
+                </p>
+              </div>
+              <div className="w-px h-8 bg-gray-200 dark:bg-white/10" />
+              <div className="text-center">
+                <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
+                  248
+                </p>
+                <p className="text-xs text-gray-400 dark:text-white/30">
+                  Followers
+                </p>
+              </div>
+              <div className="w-px h-8 bg-gray-200 dark:bg-white/10" />
+              <div className="text-center">
+                <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
+                  89
+                </p>
+                <p className="text-xs text-gray-400 dark:text-white/30">
+                  Following
+                </p>
+              </div>
+              <div className="w-px h-8 bg-gray-200 dark:bg-white/10" />
+              <div className="text-center">
+                <p className="text-xl font-bold text-[#0F2B5B] dark:text-white">
+                  6.2K
+                </p>
+                <p className="text-xs text-gray-400 dark:text-white/30">
+                  Total Views
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Tabs */}
@@ -220,7 +203,6 @@ export default function ProfilePage() {
         {/* Tab Content */}
         <div className="pb-16">
 
-          {/* Posts Tab */}
           {activeTab === 'Posts' && (
             <div className="space-y-4 max-w-2xl">
               {userPosts.map((post) => (
@@ -248,15 +230,15 @@ export default function ProfilePage() {
                     <div className="flex items-center gap-3">
                       <span className="flex items-center gap-1">
                         <Eye className="h-3 w-3" />
-                        {post.views.toLocaleString()}
+                        <span>{post.views.toLocaleString()}</span>
                       </span>
                       <span className="flex items-center gap-1">
                         <Heart className="h-3 w-3" />
-                        {post.likes}
+                        <span>{post.likes}</span>
                       </span>
                       <span className="flex items-center gap-1">
                         <MessageCircle className="h-3 w-3" />
-                        {post.comments}
+                        <span>{post.comments}</span>
                       </span>
                     </div>
                   </div>
@@ -265,7 +247,6 @@ export default function ProfilePage() {
             </div>
           )}
 
-          {/* Bookmarks Tab */}
           {activeTab === 'Bookmarks' && (
             <div className="space-y-4 max-w-2xl">
               {bookmarkedPosts.map((post) => (
@@ -289,7 +270,7 @@ export default function ProfilePage() {
                     <span>By {post.author}</span>
                     <div className="flex items-center gap-1">
                       <Bookmark className="h-3 w-3 text-[#F97316]" />
-                      Saved
+                      <span>Saved</span>
                     </div>
                   </div>
                 </article>
@@ -297,7 +278,6 @@ export default function ProfilePage() {
             </div>
           )}
 
-          {/* About Tab */}
           {activeTab === 'About' && (
             <div className="max-w-2xl space-y-6">
               <div className="bg-white dark:bg-white/5 rounded-2xl p-6 border border-gray-100 dark:border-white/10 space-y-4">
@@ -308,13 +288,14 @@ export default function ProfilePage() {
                   About Kareemah
                 </h3>
                 <p className="text-gray-600 dark:text-white/60 leading-relaxed">
-                  A Product Manager and Frontend Engineer based in Nigeria with a passion for building beautiful, 
-                  accessible web applications, also studying Django Backend development. Chatter is my first full stack project — 
-                  a publishing platform built for African writers and readers.
+                  Product Manager and Django Backend Engineer based in Bauchi, Nigeria.
+                  I write poems and read them to school children because I believe words
+                  have the power to shape young minds and build better futures.
                 </p>
                 <p className="text-gray-600 dark:text-white/60 leading-relaxed">
-                  I believe in the power of long-form content to change minds and 
-                  move culture forward. Writing is thinking made visible.
+                  Chatter is my first full stack project — a publishing platform built
+                  for African writers and readers who believe in the power of long-form,
+                  thoughtful content. Think it. Write it. Share it.
                 </p>
               </div>
 
@@ -326,7 +307,7 @@ export default function ProfilePage() {
                   Topics I Write About
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {['Technology', 'Writing', 'Design', 'Africa', 'Startups'].map((tag) => (
+                  {['Technology', 'Writing', 'Poetry', 'Africa', 'Education'].map((tag) => (
                     <span
                       key={tag}
                       className="px-4 py-2 rounded-full border-2 border-[#0F2B5B] dark:border-white/20 text-sm font-semibold text-[#0F2B5B] dark:text-white"

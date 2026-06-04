@@ -8,7 +8,7 @@ import {
   Menu,
   X,
   LogOut,
-  User,
+  User as UserIcon,
   LayoutDashboard,
 } from "lucide-react";
 import { useTheme } from "@/app/providers";
@@ -122,7 +122,7 @@ export function Navbar() {
                         className="flex items-center gap-3 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-colors"
                         onClick={() => setDropdownOpen(false)}
                       >
-                        <User className="h-4 w-4" />
+                        <UserIcon className="h-4 w-4" />
                         My Profile
                       </Link>
                       <Link
