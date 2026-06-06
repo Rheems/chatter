@@ -33,8 +33,10 @@ interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
   const [theme, setThemeState] = useState<Theme>('light')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const stored = localStorage.getItem('theme') as Theme | null
     if (stored) {
       setThemeState(stored)
@@ -51,6 +53,14 @@ export function Providers({ children }: ProvidersProps) {
     setThemeState(t)
     localStorage.setItem('theme', t)
     applyTheme(t)
+  }
+
+  if (!mounted) {
+    return (
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    )
   }
 
   return (
