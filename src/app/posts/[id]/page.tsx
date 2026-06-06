@@ -1,3 +1,7 @@
+'use client'
+
+import { useState } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Heart, MessageCircle, Bookmark, Share2, Clock, Eye } from 'lucide-react'
 
@@ -187,23 +191,23 @@ const placeholderPosts = [
     content: [
       'Who is your role model when it comes to tech? Sure, we all have one.',
       'Imagine the greatness that coded the sun, designed the ocean and launched the galaxies — without a laptop or a MacBook.',
-      'God is the ultimate tech bro. Not your regular tech bro with a Mac, but the One that says "Be" Be and it is.',
-      'Let there be light. And boom the first line of code ran without a bug.',
+      'God is the ultimate tech bro. Not your regular tech bro with a Mac, but the One that says "Be" — and it is.',
+      'Let there be light. And boom — the first line of code ran without a bug.',
       'He didn\'t debug the void. He deployed the valleys, mountains and hills. Backend so seamless, yet the architecture behind it remains unknown.',
-      'A friend of mine, Itoro, once said God is a tech bro. But if she want to be biased, she would say God is a product manager — because He wears many hats.',
+      'A friend of mine, Itoro, once said God is a tech bro. But if I want to be biased, I would say God is a product manager — because He wears many hats.',
       'I smiled and said: God is the ultimate tech bro. The most perfect developer. No errors. No bugs. Seamless from beginning to finish.',
-      'He built humans with an API called the breath of life. Gave us risky features and free will. but hey, every dev loves a challenge.',
-      'He watches us now and always not with a drone, not a CCTV camera, but with something more powerful than 5G. Oh my. Omnipotent. Omnipresent.',
-      'When you pray, it is an asynchronous request. He either responds immediately or you have to async await. He never ghosts us. You just have to console.log it well.',
+      'He built humans with an API called the breath of life. Gave us risky features and free will — but hey, every dev loves a challenge.',
+      'He watches us — not with a drone, not a CCTV camera, but with something more powerful than 5G. Oh my. Omnipotent. Omnipresent.',
+      'When you pray, it is an asynchronous request. He either responds immediately — or you have to async await. He never ghosts us. You just have to console.log it well.',
       'When next the code of your life breaks, just know that God is the ultimate tech bro who never ships a half-baked build.',
       'We are all a work in progress. Your version 2.0 will be worth the wait.',
-      'Always remember God is the ultimate tech bro.',
+      'Always remember — God is the ultimate tech bro.',
       '— Kareemah Ahmad',
     ],
   },
 ]
 
-const placeholderComments = [
+const initialComments = [
   {
     id: '1',
     author: 'Amara Nwosu',
@@ -227,12 +231,38 @@ const placeholderComments = [
   },
 ]
 
-export default function PostDetailPage({
-  params,
-}: {
-  params: { id: string }
-}) {
-  const post = placeholderPosts.find((p) => p.id === params.id) ?? placeholderPosts[0]
+export default function PostDetailPage() {
+  const params = useParams()
+  const id = params.id as string
+  const post = placeholderPosts.find((p) => p.id === id) ?? placeholderPosts[0]
+
+  const [comment, setComment] = useState('')
+  const [comments, setComments] = useState(initialComments)
+  const [liked, setLiked] = useState(false)
+  const [bookmarked, setBookmarked] = useState(false)
+  const [likeCount, setLikeCount] = useState(post.likes)
+
+  function handleComment() {
+    if (!comment.trim()) return
+    const newComment = {
+      id: String(comments.length + 1),
+      author: 'Kareemah Ahmad',
+      content: comment,
+      date: 'Just now',
+      likes: 0,
+    }
+    setComments([newComment, ...comments])
+    setComment('')
+  }
+
+  function handleLike() {
+    setLiked(!liked)
+    setLikeCount(liked ? likeCount - 1 : likeCount + 1)
+  }
+
+  function handleBookmark() {
+    setBookmarked(!bookmarked)
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0F1E]">
@@ -255,18 +285,28 @@ export default function PostDetailPage({
 
           {/* Left Action Bar */}
           <div className="hidden lg:flex flex-col items-center gap-6 pt-8 sticky top-32 h-fit">
+
+            {/* Like Button */}
             <button
               aria-label="Like post"
+              onClick={handleLike}
               className="flex flex-col items-center gap-1 group"
             >
-              <div className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-red-400 group-hover:bg-red-50 dark:group-hover:bg-red-500/10 transition-all">
-                <Heart className="h-5 w-5 text-gray-400 group-hover:text-red-400 transition-colors" />
+              <div className={`h-10 w-10 rounded-full border-2 flex items-center justify-center transition-all ${
+                liked
+                  ? 'border-red-400 bg-red-50 dark:bg-red-500/10'
+                  : 'border-gray-200 dark:border-white/10 group-hover:border-red-400 group-hover:bg-red-50 dark:group-hover:bg-red-500/10'
+              }`}>
+                <Heart className={`h-5 w-5 transition-colors ${
+                  liked ? 'text-red-400 fill-red-400' : 'text-gray-400 group-hover:text-red-400'
+                }`} />
               </div>
               <span className="text-xs text-gray-400 dark:text-white/30">
-                {post.likes}
+                {likeCount}
               </span>
             </button>
 
+            {/* Comment Button */}
             <button
               aria-label="Comment on post"
               className="flex flex-col items-center gap-1 group"
@@ -275,19 +315,28 @@ export default function PostDetailPage({
                 <MessageCircle className="h-5 w-5 text-gray-400 group-hover:text-[#0F2B5B] dark:group-hover:text-white transition-colors" />
               </div>
               <span className="text-xs text-gray-400 dark:text-white/30">
-                {post.comments}
+                {comments.length}
               </span>
             </button>
 
+            {/* Bookmark Button */}
             <button
               aria-label="Bookmark post"
+              onClick={handleBookmark}
               className="flex flex-col items-center gap-1 group"
             >
-              <div className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-white/10 flex items-center justify-center group-hover:border-[#F97316] group-hover:bg-orange-50 dark:group-hover:bg-orange-500/10 transition-all">
-                <Bookmark className="h-5 w-5 text-gray-400 group-hover:text-[#F97316] transition-colors" />
+              <div className={`h-10 w-10 rounded-full border-2 flex items-center justify-center transition-all ${
+                bookmarked
+                  ? 'border-[#F97316] bg-orange-50 dark:bg-orange-500/10'
+                  : 'border-gray-200 dark:border-white/10 group-hover:border-[#F97316] group-hover:bg-orange-50 dark:group-hover:bg-orange-500/10'
+              }`}>
+                <Bookmark className={`h-5 w-5 transition-colors ${
+                  bookmarked ? 'text-[#F97316] fill-[#F97316]' : 'text-gray-400 group-hover:text-[#F97316]'
+                }`} />
               </div>
             </button>
 
+            {/* Share Button */}
             <button
               aria-label="Share post"
               className="flex flex-col items-center gap-1 group"
@@ -296,6 +345,7 @@ export default function PostDetailPage({
                 <Share2 className="h-5 w-5 text-gray-400 group-hover:text-[#0F2B5B] dark:group-hover:text-white transition-colors" />
               </div>
             </button>
+
           </div>
 
           {/* Main Content */}
@@ -362,23 +412,29 @@ export default function PostDetailPage({
             <div className="flex items-center justify-center gap-6 py-8 mt-8 border-t border-gray-100 dark:border-white/10 lg:hidden">
               <button
                 aria-label="Like post"
-                className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/50 hover:text-red-400 transition-colors"
+                onClick={handleLike}
+                className={`flex items-center gap-2 text-sm transition-colors ${
+                  liked ? 'text-red-400' : 'text-gray-500 dark:text-white/50 hover:text-red-400'
+                }`}
               >
-                <Heart className="h-5 w-5" />
-                <span>{post.likes}</span>
+                <Heart className={`h-5 w-5 ${liked ? 'fill-red-400' : ''}`} />
+                <span>{likeCount}</span>
               </button>
               <button
                 aria-label="Comment on post"
                 className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/50 hover:text-[#0F2B5B] dark:hover:text-white transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
-                <span>{post.comments}</span>
+                <span>{comments.length}</span>
               </button>
               <button
                 aria-label="Bookmark post"
-                className="flex items-center gap-2 text-sm text-gray-500 dark:text-white/50 hover:text-[#F97316] transition-colors"
+                onClick={handleBookmark}
+                className={`flex items-center gap-2 text-sm transition-colors ${
+                  bookmarked ? 'text-[#F97316]' : 'text-gray-500 dark:text-white/50 hover:text-[#F97316]'
+                }`}
               >
-                <Bookmark className="h-5 w-5" />
+                <Bookmark className={`h-5 w-5 ${bookmarked ? 'fill-[#F97316]' : ''}`} />
                 <span>Save</span>
               </button>
               <button
@@ -396,7 +452,7 @@ export default function PostDetailPage({
                 className="text-2xl font-bold text-[#0F2B5B] dark:text-white"
                 style={{ fontFamily: 'var(--font-playfair)' }}
               >
-                Comments ({post.comments})
+                Comments ({comments.length})
               </h2>
 
               {/* Comment Input */}
@@ -408,9 +464,15 @@ export default function PostDetailPage({
                   <textarea
                     placeholder="Share your thoughts..."
                     rows={3}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm outline-none focus:border-[#0F2B5B] dark:focus:border-[#F97316] transition-all resize-none"
                   />
-                  <button className="px-5 py-2 rounded-xl bg-[#0F2B5B] text-white text-sm font-semibold hover:bg-[#0F2B5B]/90 transition-all">
+                  <button
+                    onClick={handleComment}
+                    disabled={!comment.trim()}
+                    className="px-5 py-2 rounded-xl bg-[#0F2B5B] text-white text-sm font-semibold hover:bg-[#0F2B5B]/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     Post Comment
                   </button>
                 </div>
@@ -418,29 +480,29 @@ export default function PostDetailPage({
 
               {/* Comments List */}
               <div className="space-y-6">
-                {placeholderComments.map((comment) => (
-                  <div key={comment.id} className="flex gap-3">
+                {comments.map((c) => (
+                  <div key={c.id} className="flex gap-3">
                     <div className="h-9 w-9 rounded-full bg-[#0F2B5B] flex items-center justify-center text-sm font-bold text-white shrink-0">
-                      {comment.author.charAt(0)}
+                      {c.author.charAt(0)}
                     </div>
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center gap-2">
                         <p className="text-sm font-semibold text-[#0F2B5B] dark:text-white">
-                          {comment.author}
+                          {c.author}
                         </p>
                         <p className="text-xs text-gray-400 dark:text-white/30">
-                          {comment.date}
+                          {c.date}
                         </p>
                       </div>
                       <p className="text-sm text-gray-600 dark:text-white/60 leading-relaxed">
-                        {comment.content}
+                        {c.content}
                       </p>
                       <button
                         aria-label="Like comment"
                         className="flex items-center gap-1 text-xs text-gray-400 dark:text-white/30 hover:text-red-400 transition-colors pt-1"
                       >
                         <Heart className="h-3 w-3" />
-                        <span>{comment.likes}</span>
+                        <span>{c.likes}</span>
                       </button>
                     </div>
                   </div>
@@ -490,7 +552,7 @@ export default function PostDetailPage({
                 </p>
                 <div className="space-y-4">
                   {placeholderPosts
-                    .filter((p) => p.id !== post.id)
+                    .filter((p) => p.id !== id)
                     .slice(0, 3)
                     .map((p) => (
                       <Link
